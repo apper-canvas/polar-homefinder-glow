@@ -1,8 +1,7 @@
-/* global CustomEvent */
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
 
 const NotFound = () => {
   const navigate = useNavigate();
@@ -64,11 +63,11 @@ const NotFound = () => {
             {["Seattle", "San Diego", "Portland", "Austin", "Miami", "Boston"].map((city) => (
               <button
                 key={city}
-                onClick={() => {
+onClick={() => {
                   navigate("/");
                   // Trigger a search for this city
                   setTimeout(() => {
-                    window.dispatchEvent(new CustomEvent("searchTermChanged", { detail: city }));
+                    window.dispatchEvent(new window.CustomEvent("searchTermChanged", { detail: city }));
                   }, 100);
                 }}
                 className="px-3 py-1 bg-white border border-gray-200 rounded-full text-sm text-gray-700 hover:border-primary hover:text-primary cursor-pointer transition-colors duration-200"
