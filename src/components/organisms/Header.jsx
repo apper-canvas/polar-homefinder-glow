@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import SearchBar from "@/components/molecules/SearchBar";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import ApperIcon from "@/components/ApperIcon";
+import SearchBar from "@/components/molecules/SearchBar";
 
 const Header = ({ onSearch, savedCount = 0 }) => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -46,7 +48,7 @@ const Header = ({ onSearch, savedCount = 0 }) => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+<nav className="hidden md:flex items-center space-x-6">
             <button
               onClick={() => navigate("/")}
               className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 ${
@@ -73,6 +75,14 @@ const Header = ({ onSearch, savedCount = 0 }) => {
                   {savedCount > 99 ? "99+" : savedCount}
                 </span>
               )}
+            </button>
+
+            <button
+              onClick={logout}
+              className="px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 flex items-center gap-2 text-gray-700 hover:text-primary hover:bg-primary/5"
+            >
+              <ApperIcon name="LogOut" className="w-4 h-4" />
+              Logout
             </button>
           </nav>
 
@@ -107,7 +117,7 @@ const Header = ({ onSearch, savedCount = 0 }) => {
               Browse Properties
             </button>
             
-            <button
+<button
               onClick={handleSavedClick}
               className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200 flex items-center justify-between ${
                 isActivePage("/saved")
@@ -124,6 +134,14 @@ const Header = ({ onSearch, savedCount = 0 }) => {
                   {savedCount > 99 ? "99+" : savedCount}
                 </span>
               )}
+            </button>
+
+            <button
+              onClick={logout}
+              className="w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200 flex items-center gap-3 text-gray-700 hover:bg-gray-50"
+            >
+              <ApperIcon name="LogOut" className="w-5 h-5" />
+              Logout
             </button>
           </div>
         </div>
